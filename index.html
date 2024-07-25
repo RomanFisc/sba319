@@ -17,7 +17,6 @@
 
   <ul id="categories-list"></ul>
 
-
   <h2>Add Task</h2>
   <form id="task-form">
     <input type="text" id="task-title" placeholder="Task Title" required>
@@ -25,23 +24,22 @@
     <select id="task-category" required>
         <option value="">Select Category</option>
     </select>
+
+    <input type="date" id="task-due-date" placeholder="Due Date">
+    
+    <select id="task-priority">
+        <option value="Low">Low</option>
+        <option value="Medium" selected>Medium</option>
+        <option value="High">High</option>
+    </select>
     
     <button type="submit">Add Task</button>
-</form>
+  </form>
 
   <h2>Tasks</h2>
   <ul id="tasks-list"></ul>
 
-  <h2>Add User</h2>
-  <form id="user-form">
-    <input type="text" id="user-name" placeholder="User name" required>
-    <button type="submit">Add User</button>
-  </form>
-
-  <h2>Users</h2>
-  <ul id="users-list"></ul>
-
-
+ 
 
 </body>
 </html>

@@ -4,7 +4,7 @@ const Category = require('../models/category');
 // Controller functions for tasks
 exports.createTask = async (req, res) => {
   try {
-    const { title, completed, category } = req.body;
+    const { title, completed, category, dueDate, priority } = req.body;
 
     if (category) {
       const foundCategory = await Category.findById(category);
@@ -13,7 +13,7 @@ exports.createTask = async (req, res) => {
       }
     }
 
-    const task = new Task({ title, completed, category });
+    const task = new Task({ title, completed, category, dueDate, priority });
     await task.save();
 
     res.status(201).json(task);
