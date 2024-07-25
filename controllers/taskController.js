@@ -1,36 +1,54 @@
 const Task = require('../models/task');
+const Category = require('../models/category');
 
-// Controller to get all tasks
+// Controller functions for tasks
+exports.createTask = async (req, res) => {
+  try {
+    const { title, completed, category } = req.body;
+
+    if (category) {
+      const foundCategory = await Category.findById(category);
+      if (!foundCategory) {
+        return res.status(400).json({ error: 'Category not found' });
+      }
+    }
+
+    const task = new Task({ title, completed, category });
+    await task.save();
+
+    res.status(201).json(task);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
 exports.getTasks = async (req, res) => {
   try {
-    const tasks = await Task.find();
+    const { category } = req.query;
+
+    const query = {};
+    if (category) {
+      query.category = category;
+    }
+
+    const tasks = await Task.find(query).populate('category');
     res.status(200).json(tasks);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(400).json({ error: err.message });
   }
 };
 
-// Controller to create a new task
-exports.createTask = async (req, res) => {
-  const task = new Task({
-    title: req.body.title,
-    completed: req.body.completed
-  });
-  try {
-    const newTask = await task.save();
-    res.status(201).json(newTask);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-};
-
-// Controller to delete a task
 exports.deleteTask = async (req, res) => {
   try {
-    const task = await Task.findByIdAndDelete(req.params.id);
-    if (!task) return res.status(404).json({ message: 'Task not found' });
-    res.status(200).json({ message: 'Task deleted' });
+    const { id } = req.params;
+    const task = await Task.findByIdAndDelete(id);
+
+    if (!task) {
+      return res.status(404).json({ error: 'Task not found' });
+    }
+
+    res.status(200).json({ message: 'Task deleted successfully' });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(400).json({ error: err.message });
   }
 };

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Category = require('./category');
 
 const taskSchema = new mongoose.Schema({
   title: {
@@ -12,15 +13,9 @@ const taskSchema = new mongoose.Schema({
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Category'  
-  },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'  
+    ref: 'Category'
   }
-}, { timestamps: true });
-
-taskSchema.index({ title: 1 });
+});
 
 const Task = mongoose.model('Task', taskSchema);
 
