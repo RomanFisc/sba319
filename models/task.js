@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Category = require('./category');
+const Tag = require('./tag');
 
 const taskSchema = new mongoose.Schema({
   title: {
@@ -15,10 +16,8 @@ const taskSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Category'
   },
-  dueDate: {
-    type: Date,
-    required: false
-  },
+  tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
+  dueDate: Date,
   priority: {
     type: String,
     enum: ['Low', 'Medium', 'High'],

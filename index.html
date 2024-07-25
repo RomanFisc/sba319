@@ -17,6 +17,14 @@
 
   <ul id="categories-list"></ul>
 
+  <h2>Add a tag for your task</h2>
+  <form id="tag-form">
+    <input type="text" id="tag-name" placeholder="Tag Name" required>
+    <button type="submit">Add Tag</button>
+  </form>
+
+  <ul id="tags-list"></ul>
+
   <h2>Add Task</h2>
   <form id="task-form">
     <input type="text" id="task-title" placeholder="Task Title" required>
@@ -25,8 +33,11 @@
         <option value="">Select Category</option>
     </select>
 
-    <input type="date" id="task-due-date" placeholder="Due Date">
-    
+    <select id="task-tags" multiple required>
+        <option value="">Select Tags</option>
+    </select>
+
+    <input type="date" id="task-due-date">
     <select id="task-priority">
         <option value="Low">Low</option>
         <option value="Medium" selected>Medium</option>
@@ -38,8 +49,5 @@
 
   <h2>Tasks</h2>
   <ul id="tasks-list"></ul>
-
- 
-
 </body>
 </html>
