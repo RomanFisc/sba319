@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Task = require('./models/task');
-const User = require('./models/user');
+const User = require('./models/users');
 const Category = require('./models/category');
 
 const seedDatabase = async () => {
