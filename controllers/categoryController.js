@@ -1,6 +1,5 @@
 const Category = require('../models/category');
 
-// Controller to get all categories
 exports.getAllCategories = async (req, res) => {
   try {
     const categories = await Category.find();
@@ -10,7 +9,6 @@ exports.getAllCategories = async (req, res) => {
   }
 };
 
-// Controller to create a new category
 exports.createCategory = async (req, res) => {
   const category = new Category({
     name: req.body.name
@@ -23,7 +21,6 @@ exports.createCategory = async (req, res) => {
   }
 };
 
-// Controller to delete a category
 exports.deleteCategory = async (req, res) => {
   try {
     const category = await Category.findByIdAndDelete(req.params.id);

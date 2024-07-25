@@ -10,12 +10,10 @@ const seedDatabase = async () => {
       useUnifiedTopology: true,
     });
 
-    // Clear existing data
     await Task.deleteMany({});
     await User.deleteMany({});
     await Category.deleteMany({});
 
-    // Create sample data
     const users = await User.insertMany([
       { username: 'Alice', email: 'alice@example.com', password: 'password1' },
       { username: 'Bob', email: 'bob@example.com', password: 'password2' },

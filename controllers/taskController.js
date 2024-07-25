@@ -1,7 +1,6 @@
 const Task = require('../models/task');
 const Category = require('../models/category');
 
-// Controller functions for tasks
 exports.createTask = async (req, res) => {
   try {
     const { title, completed, category, dueDate, priority } = req.body;
