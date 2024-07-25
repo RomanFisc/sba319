@@ -3,77 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To-Do List</title>
+  <title>To-Do List App</title>
+  <script defer src="app.js"></script>
 </head>
 <body>
   <h1>To-Do List</h1>
+
+  <h2>Add Task</h2>
   <form id="task-form">
-    <input type="text" id="task-title" placeholder="New Task" required>
+    <input type="text" id="task-title" placeholder="Task title" required>
     <button type="submit">Add Task</button>
   </form>
-  <ul id="task-list"></ul>
 
-  <script>
-    document.getElementById('task-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const title = document.getElementById('task-title').value;
-      try {
-        const response = await fetch('http://localhost:3000/api/tasks', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ title })
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.statusText);
-        }
-        const data = await response.json();
-        console.log('Task added:', data);
-        document.getElementById('task-title').value = '';
-        loadTasks();
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    });
+  <h2>Tasks</h2>
+  <ul id="tasks-list"></ul>
 
-    async function loadTasks() {
-      try {
-        const response = await fetch('http://localhost:3000/api/tasks');
-        if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.statusText);
-        }
-        const tasks = await response.json();
-        const taskList = document.getElementById('task-list');
-        taskList.innerHTML = '';
-        tasks.forEach(task => {
-          const li = document.createElement('li');
-          li.textContent = task.title;
-          const deleteButton = document.createElement('button');
-          deleteButton.textContent = 'Delete';
-          deleteButton.onclick = () => deleteTask(task._id);
-          li.appendChild(deleteButton);
-          taskList.appendChild(li);
-        });
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    }
+  <h2>Add User</h2>
+  <form id="user-form">
+    <input type="text" id="user-name" placeholder="User name" required>
+    <button type="submit">Add User</button>
+  </form>
 
-    async function deleteTask(id) {
-      try {
-        const response = await fetch(`http://localhost:3000/api/tasks/${id}`, {
-          method: 'DELETE'
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.statusText);
-        }
-        console.log('Task deleted');
-        loadTasks();
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    }
+  <h2>Users</h2>
+  <ul id="users-list"></ul>
 
-    loadTasks();
-  </script>
+  <h2>Add Category</h2>
+  <form id="category-form">
+    <input type="text" id="category-name" placeholder="Category name" required>
+    <button type="submit">Add Category</button>
+  </form>
+
+  <h2>Categories</h2>
+  <ul id="categories-list"></ul>
 </body>
 </html>
